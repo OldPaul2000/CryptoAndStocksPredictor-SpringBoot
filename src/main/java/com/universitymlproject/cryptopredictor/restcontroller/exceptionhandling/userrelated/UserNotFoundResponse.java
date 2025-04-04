@@ -4,24 +4,24 @@ import java.time.LocalDateTime;
 
 public class UserNotFoundResponse {
 
-    private int httpStatus;
+    private int status;
     private String message;
     private LocalDateTime timestamp;
 
     public UserNotFoundResponse() {}
 
-    public UserNotFoundResponse(int httpStatus, String message, LocalDateTime timestamp) {
-        this.httpStatus = httpStatus;
+    public UserNotFoundResponse(int status, String message, LocalDateTime timestamp) {
+        this.status = status;
         this.message = message;
         this.timestamp = timestamp;
     }
 
-    public int getHttpStatus() {
-        return httpStatus;
+    public int getStatus() {
+        return status;
     }
 
-    public void setHttpStatus(int httpStatus) {
-        this.httpStatus = httpStatus;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getMessage() {

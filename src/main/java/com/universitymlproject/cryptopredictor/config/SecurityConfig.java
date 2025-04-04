@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.password.CompromisedPasswordChecker;
@@ -35,19 +36,19 @@ public class SecurityConfig {
 
     private JwtRepository jwtRepository;
     private JwtService jwtService;
-    private Constants constants;
+    private JwtConstants jwtConstants;
 
     @Autowired
     public SecurityConfig(JwtRepository jwtRepository,
                           JwtService jwtService,
-                          Constants constants) {
+                          JwtConstants jwtConstants) {
         this.jwtRepository = jwtRepository;
         this.jwtService = jwtService;
-        this.constants = constants;
+        this.jwtConstants = jwtConstants;
     }
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         CsrfTokenRequestAttributeHandler csrfTokenRequestAttributeHandler = new CsrfTokenRequestAttributeHandler();
         httpSecurity.sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
@@ -60,29 +61,32 @@ public class SecurityConfig {
                 corsConfig.setAllowedMethods(Collections.singletonList("*"));
                 corsConfig.setAllowedHeaders(Collections.singletonList("*"));
                 corsConfig.setMaxAge(3600L);
-
                 return corsConfig;
             }
         }));
 
-        httpSecurity.csrf(config -> {config
+        httpSecurity.csrf(config -> config
                         .csrfTokenRequestHandler(csrfTokenRequestAttributeHandler)
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .ignoringRequestMatchers("/api/v1/users/login");
-                })
+                        .ignoringRequestMatchers("/api/v1/users/login"))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
-                .addFilterBefore(new JwtValidatorFilter(jwtRepository, constants), BasicAuthenticationFilter.class)
+                .addFilterBefore(new JwtValidatorFilter(jwtRepository, jwtConstants), BasicAuthenticationFilter.class)
                 .requiresChannel(rcc -> rcc.anyRequest().requiresInsecure())
-                .authorizeHttpRequests(request -> request
+                .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/api/v1/users/login").permitAll()
-                        .requestMatchers("/api/v1/users/{userId}").hasRole("USER")
-                        .requestMatchers("/api/v1/users/hello").hasRole("USER")
-                        .requestMatchers("/api/v1/users/goodbye").hasRole("ADMIN")
-
+                        .requestMatchers("/api/v1/users/{userId}").permitAll()
                         .requestMatchers("/api/v1/jwt/{userId}").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/api/v1/csrf").hasAnyRole("USER", "ADMIN")
 
-                        .requestMatchers("/api/v1/bitcoin/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, SecuredEndpoints.CRYPTO_ENDPOINTS).permitAll()
+                        .requestMatchers(HttpMethod.POST, SecuredEndpoints.CRYPTO_ENDPOINTS).hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, SecuredEndpoints.CRYPTO_ENDPOINTS).hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, SecuredEndpoints.CRYPTO_ENDPOINTS).hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, SecuredEndpoints.STOCKS_ENDPOINTS).permitAll()
+                        .requestMatchers(HttpMethod.POST, SecuredEndpoints.STOCKS_ENDPOINTS).hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, SecuredEndpoints.STOCKS_ENDPOINTS).hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, SecuredEndpoints.STOCKS_ENDPOINTS).hasRole("ADMIN")
                 );
 
 
@@ -90,10 +94,11 @@ public class SecurityConfig {
         httpSecurity.logout(config ->
                 config.logoutSuccessHandler((success, response, authentication) -> SecurityContextHolder.clearContext())
                         .logoutUrl("/api/v1/users/logout")
-                        .addLogoutHandler(new LogoutService(jwtService)));
+                        .addLogoutHandler(new LogoutService(jwtService, jwtConstants)));
 
         httpSecurity.httpBasic(config -> config.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
         httpSecurity.exceptionHandling(config -> config.accessDeniedHandler(new CustomAccessDeniedHandler()));
+
 
         return httpSecurity.build();
     }
@@ -111,8 +116,8 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(UserDetailsService userDetailsService,
                                                        PasswordEncoder passwordEncoder){
-        CustomUsernamePwdAuthentication authenticationProvider =
-                new CustomUsernamePwdAuthentication(userDetailsService, passwordEncoder);
+        CustomUsernamePwdAuthenticationProvider authenticationProvider =
+                new CustomUsernamePwdAuthenticationProvider(userDetailsService, passwordEncoder);
         ProviderManager providerManager = new ProviderManager(authenticationProvider);
         providerManager.setEraseCredentialsAfterAuthentication(false);
 

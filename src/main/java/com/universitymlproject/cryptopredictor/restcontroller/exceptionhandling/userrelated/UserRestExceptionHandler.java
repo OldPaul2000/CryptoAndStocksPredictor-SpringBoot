@@ -14,7 +14,7 @@ public class UserRestExceptionHandler {
     public ResponseEntity<UserNotFoundResponse> handleUserNotFoundException(UserNotFoundException exc){
 
         UserNotFoundResponse response = new UserNotFoundResponse();
-        response.setHttpStatus(HttpStatus.NOT_FOUND.value());
+        response.setStatus(HttpStatus.NOT_FOUND.value());
         response.setMessage(exc.getMessage());
         response.setTimestamp(LocalDateTime.now());
 

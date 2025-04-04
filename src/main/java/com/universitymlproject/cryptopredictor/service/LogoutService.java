@@ -1,11 +1,11 @@
 package com.universitymlproject.cryptopredictor.service;
 
+import com.universitymlproject.cryptopredictor.config.JwtConstants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
@@ -18,23 +18,19 @@ import java.nio.charset.StandardCharsets;
 public class LogoutService implements LogoutHandler {
 
     private JwtService jwtService;
+    private JwtConstants jwtConstants;
 
-    @Value("${jwt.secret-key}")
-    private String SECRET;
-
-    @Value("${jwt.header}")
-    private String AUTHORIZATION_HEADER;
-
-    public LogoutService(JwtService jwtService) {
+    public LogoutService(JwtService jwtService, JwtConstants jwtConstants) {
         this.jwtService = jwtService;
+        this.jwtConstants = jwtConstants;
     }
 
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        String jwt = request.getHeader("Authorization");
+        String jwt = request.getHeader(jwtConstants.getJWT_HEADER());
         if(jwt != null){
             try{
-                SecretKey secretKey = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
+                SecretKey secretKey = Keys.hmacShaKeyFor(jwtConstants.getSECRET().getBytes(StandardCharsets.UTF_8));
                 if(secretKey != null){
                     Claims claims = Jwts.parser().verifyWith(secretKey)
                             .build().parseSignedClaims(jwt).getPayload();

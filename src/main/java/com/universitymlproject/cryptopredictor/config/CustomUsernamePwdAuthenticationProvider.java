@@ -12,13 +12,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomUsernamePwdAuthentication implements AuthenticationProvider {
+public class CustomUsernamePwdAuthenticationProvider implements AuthenticationProvider {
 
     private UserDetailsService userDetailsService;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public CustomUsernamePwdAuthentication(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+    public CustomUsernamePwdAuthenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
     }

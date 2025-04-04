@@ -2,58 +2,126 @@ package com.universitymlproject.cryptopredictor.model.crypto;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "bitcoin")
-public class Bitcoin {
+public class Bitcoin extends CryptoCurrency{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "low")
-    private double low;
+    @Column(name = "date")
+    private LocalDate date;
+
+    @Column(name = "close")
+    private Double close;
+
+    @Column(name = "volume")
+    private Long volume;
+
+    @Column(name = "open")
+    private Double open;
 
     @Column(name = "high")
-    private double high;
+    private Double high;
+
+    @Column(name = "low")
+    private Double low;
 
     public Bitcoin() {}
 
-    public Bitcoin(double low, double high) {
-        this.low = low;
+    public Bitcoin(LocalDate date, Double close, Long volume, Double open, Double high, Double low) {
+        this.date = date;
+        this.close = close;
+        this.volume = volume;
+        this.open = open;
         this.high = high;
+        this.low = low;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
-    public double getLow() {
-        return low;
+    @Override
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setLow(double low) {
-        this.low = low;
+    @Override
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public double getHigh() {
+    @Override
+    public Double getClose() {
+        return close;
+    }
+
+    @Override
+    public void setClose(Double close) {
+        this.close = close;
+    }
+
+    @Override
+    public Long getVolume() {
+        return volume;
+    }
+
+    @Override
+    public void setVolume(Long volume) {
+        this.volume = volume;
+    }
+
+    @Override
+    public Double getOpen() {
+        return open;
+    }
+
+    @Override
+    public void setOpen(Double open) {
+        this.open = open;
+    }
+
+    @Override
+    public Double getHigh() {
         return high;
     }
 
-    public void setHigh(double high) {
+    @Override
+    public void setHigh(Double high) {
         this.high = high;
+    }
+
+    @Override
+    public Double getLow() {
+        return low;
+    }
+
+    @Override
+    public void setLow(Double low) {
+        this.low = low;
     }
 
     @Override
     public String toString() {
         return "Bitcoin{" +
                 "id=" + id +
-                ", low=" + low +
+                ", date=" + date +
+                ", close=" + close +
+                ", volume=" + volume +
+                ", open=" + open +
                 ", high=" + high +
+                ", low=" + low +
                 '}';
     }
 }

@@ -1,6 +1,6 @@
 package com.universitymlproject.cryptopredictor.filter;
 
-import com.universitymlproject.cryptopredictor.config.Constants;
+import com.universitymlproject.cryptopredictor.config.JwtConstants;
 import com.universitymlproject.cryptopredictor.model.userrelated.Jwt;
 import com.universitymlproject.cryptopredictor.repository.JwtRepository;
 import io.jsonwebtoken.Claims;
@@ -24,20 +24,20 @@ import java.nio.charset.StandardCharsets;
 public class JwtValidatorFilter extends OncePerRequestFilter {
 
     private JwtRepository jwtRepository;
-    private Constants constants;
+    private JwtConstants jwtConstants;
 
     public JwtValidatorFilter(JwtRepository jwtRepository,
-                              Constants constants) {
+                              JwtConstants jwtConstants) {
         this.jwtRepository = jwtRepository;
-        this.constants = constants;
+        this.jwtConstants = jwtConstants;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String jwt = request.getHeader(constants.getJWT_HEADER());
+        String jwt = request.getHeader(jwtConstants.getJWT_HEADER());
         if(jwt != null){
             try {
-                SecretKey secretKey = Keys.hmacShaKeyFor(constants.getSECRET().getBytes(StandardCharsets.UTF_8));
+                SecretKey secretKey = Keys.hmacShaKeyFor(jwtConstants.getSECRET().getBytes(StandardCharsets.UTF_8));
                 if(secretKey != null){
                     Claims claims = Jwts.parser().verifyWith(secretKey)
                             .build().parseSignedClaims(jwt).getPayload();
@@ -52,13 +52,13 @@ public class JwtValidatorFilter extends OncePerRequestFilter {
                 }
             }
             catch (InvalidKeyException e){
-                response.setHeader("cause", "JWT is invalid");
+                response.setHeader("cause", e.getMessage());
             }
             catch (Exception e){
                 response.setHeader("cause", "JWT is expired");
             }
-            filterChain.doFilter(request, response);
         }
+        filterChain.doFilter(request, response);
     }
 
     private void currentTokenIsValid(String currentToken, long userId){
@@ -67,11 +67,5 @@ public class JwtValidatorFilter extends OncePerRequestFilter {
             throw new InvalidKeyException("JWT is invalid");
         }
     }
-
-//    @Override
-//    public boolean shouldNotFilter(HttpServletRequest request){
-//        return request.getServletPath().equals("/api/v1/users/login");
-//    }
-
 
 }

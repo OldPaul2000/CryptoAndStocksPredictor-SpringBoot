@@ -2,6 +2,7 @@ package com.universitymlproject.cryptopredictor.restcontroller;
 
 import com.universitymlproject.cryptopredictor.dto.userrelated.LoginCredentialsDTOPost;
 import com.universitymlproject.cryptopredictor.dto.userrelated.LoginResponseDTO;
+import com.universitymlproject.cryptopredictor.dto.userrelated.UserDTOGet;
 import com.universitymlproject.cryptopredictor.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,14 +21,25 @@ public class UserController {
         this.authenticationManager = authenticationManager;
     }
 
+    @PostMapping("/login2")
+    public ResponseEntity<LoginCredentialsDTOPost> login2(@RequestBody LoginCredentialsDTOPost loginCredentials){
+        System.out.println("Login2");
+        return ResponseEntity.ok(loginCredentials);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginCredentialsDTOPost loginCredentials){
         return ResponseEntity.ok(userService.login(loginCredentials, authenticationManager));
     }
 
     @GetMapping("/{userId}")
-    public LoginResponseDTO getUserById(@PathVariable long userId){
+    public UserDTOGet getUserById(@PathVariable("userId") long userId){
         return userService.getUserById(userId);
+    }
+
+    @GetMapping("/how-are-you")
+    public String aswHowAreYou(){
+        return "How are you ?";
     }
 
     @GetMapping("/hello")

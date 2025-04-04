@@ -1,7 +1,7 @@
 package com.universitymlproject.cryptopredictor;
 
-import com.universitymlproject.cryptopredictor.repository.UserRepository;
-import com.universitymlproject.cryptopredictor.service.UserService;
+import com.universitymlproject.cryptopredictor.service.cryptoservice.BitcoinService;
+import com.universitymlproject.cryptopredictor.service.stocksservice.AmazonService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,14 +14,10 @@ public class CryptopredictorApplication {
 		SpringApplication.run(CryptopredictorApplication.class, args);
 	}
 
-	/**TODO
-	 * Secure api endpoints properly
-	 */
-
 	@Bean
-	public CommandLineRunner commandLineRunner(UserService userService, UserRepository userRepository){
+	public CommandLineRunner commandLineRunner(AmazonService amazonService, BitcoinService bitcoinService){
 		return runner -> {
-			System.out.println(userRepository.findUserByUsernameWithRoles("John"));
+
 		};
 	}
 

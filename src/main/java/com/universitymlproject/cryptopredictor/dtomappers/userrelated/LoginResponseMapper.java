@@ -5,11 +5,11 @@ import com.universitymlproject.cryptopredictor.model.userrelated.User;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDTOMapper {
+public class LoginResponseMapper {
 
     private RoleDTOMapper roleMapper;
 
-    public UserDTOMapper(RoleDTOMapper roleMapper) {
+    public LoginResponseMapper(RoleDTOMapper roleMapper) {
         this.roleMapper = roleMapper;
     }
 

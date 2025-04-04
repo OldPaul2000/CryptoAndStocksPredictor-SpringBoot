@@ -22,11 +22,10 @@ public class CustomBasicAuthenticationEntryPoint implements AuthenticationEntryP
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType("application/json;charset=UTF-8");
 
-        String jsonResponse = "timestamp:  " + currentTimeStamp +
-                              ", status: " + HttpStatus.UNAUTHORIZED.value() +
-                              ", error: " + HttpStatus.UNAUTHORIZED.getReasonPhrase() +
-                              ", message: " + message +
-                              ", path: " + path;
+        String jsonResponse =
+                String.format("{\"timestamp\": \"%s\", \"status\": %d, \"error\": \"%s\", \"message\": \"%s\", \"path\": \"%s\"}",
+                        currentTimeStamp, HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase(),
+                        message, path);
 
         response.getWriter().write(jsonResponse);
     }

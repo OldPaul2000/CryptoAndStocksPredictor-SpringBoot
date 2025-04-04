@@ -34,12 +34,11 @@ public class JwtService {
     };
 
     @Transactional
-    public void invalidateToken(long userId, String jwt){
+    public void invalidateToken(long userId, String currentToken){
         Jwt token = jwtRepository.findJWTByUserId(userId);
-        if(token.getJwt().equals(jwt)){
+        if(token != null && token.getJwt().equals(currentToken)){
             token.getUser().setJwt(null);
             token.setUser(null);
-
             jwtRepository.removeToken(token);
         }
     }

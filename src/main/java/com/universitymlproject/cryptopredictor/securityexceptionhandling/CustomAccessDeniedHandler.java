@@ -19,14 +19,13 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
                 accessDeniedException.getMessage() : "Authorization failed";
         String path = request.getRequestURI();
         response.setHeader("denied-reason", "Authorization failed");
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setStatus(HttpStatus.FORBIDDEN.value());
         response.setContentType("application/json;charset=UTF-8");
 
-        String jsonResponse = "timestamp: " + currentTimeStamp + ", " +
-                              "status: " + HttpStatus.UNAUTHORIZED.value() + ", " +
-                              "error: " + HttpStatus.UNAUTHORIZED.getReasonPhrase() + ", " +
-                              "message: " + message + ", " +
-                              "path: " + path;
+        String jsonResponse =
+                String.format("{\"timestamp\": \"%s\", \"status\": %d, \"error\": \"%s\", \"message\": \"%s\", \"path\": \"%s\"}",
+                        currentTimeStamp, HttpStatus.FORBIDDEN.value(), HttpStatus.FORBIDDEN.getReasonPhrase(),
+                        message, path);
 
         response.getWriter().write(jsonResponse);
     }

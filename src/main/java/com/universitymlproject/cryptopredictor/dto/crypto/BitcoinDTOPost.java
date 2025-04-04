@@ -1,8 +1,17 @@
 package com.universitymlproject.cryptopredictor.dto.crypto;
 
-public record BitcoinDTOPost
-        (
-                double low,
-                double heigh
-        ) {
+import java.time.LocalDate;
+
+public class BitcoinDTOPost extends CryptoDTOPost{
+
+    private LocalDate date;
+    private double close;
+    private long volume;
+    private double open;
+    private double high;
+    private double low;
+
+    public BitcoinDTOPost(LocalDate date, double close, long volume, double open, double high, double low) {
+        super(date, close, volume, open, high, low);
+    }
 }
