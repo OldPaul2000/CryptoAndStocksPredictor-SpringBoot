@@ -1,15 +1,15 @@
-package com.universitymlproject.cryptopredictor.restcontroller.exceptionhandling.userrelated;
+package com.universitymlproject.cryptopredictor.restcontroller.exceptionhandling.excel;
 
 import java.time.LocalDateTime;
 
-public class UserNotFoundResponse {
+public class FileReadingFailedResponse {
 
     private LocalDateTime timestamp;
     private int status;
     private String message;
 
-    public UserNotFoundResponse() {}
-    public UserNotFoundResponse(LocalDateTime timestamp, int status, String message) {
+    public FileReadingFailedResponse() {}
+    public FileReadingFailedResponse(LocalDateTime timestamp, int status, String message) {
         this.timestamp = timestamp;
         this.status = status;
         this.message = message;

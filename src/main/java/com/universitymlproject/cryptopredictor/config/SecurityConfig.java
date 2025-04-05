@@ -87,6 +87,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, SecuredEndpoints.STOCKS_ENDPOINTS).hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, SecuredEndpoints.STOCKS_ENDPOINTS).hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, SecuredEndpoints.STOCKS_ENDPOINTS).hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/api/v1/excel-data").permitAll()
                 );
 
 

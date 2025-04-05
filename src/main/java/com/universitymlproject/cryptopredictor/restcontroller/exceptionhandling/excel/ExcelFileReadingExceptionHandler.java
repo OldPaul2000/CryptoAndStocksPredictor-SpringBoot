@@ -1,4 +1,4 @@
-package com.universitymlproject.cryptopredictor.restcontroller.exceptionhandling.userrelated;
+package com.universitymlproject.cryptopredictor.restcontroller.exceptionhandling.excel;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.LocalDateTime;
 
 @ControllerAdvice
-public class UserRestExceptionHandler {
+public class ExcelFileReadingExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<UserNotFoundResponse> handleUserNotFoundException(UserNotFoundException exc){
+    public ResponseEntity<FileReadingFailedResponse> handleFileReadingFailed(FileReadingFailedException exc){
 
-        UserNotFoundResponse response = new UserNotFoundResponse();
+        FileReadingFailedResponse response = new FileReadingFailedResponse();
         response.setTimestamp(LocalDateTime.now());
         response.setStatus(HttpStatus.NOT_FOUND.value());
         response.setMessage(exc.getMessage());
