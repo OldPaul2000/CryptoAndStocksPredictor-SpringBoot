@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "bitcoin")
-public class Bitcoin extends CryptoCurrency{
+public class Bitcoin extends Crypto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,6 @@ public class Bitcoin extends CryptoCurrency{
     private Double low;
 
     public Bitcoin() {}
-
     public Bitcoin(LocalDate date, Double close, Long volume, Double open, Double high, Double low) {
         this.date = date;
         this.close = close;
@@ -42,72 +41,58 @@ public class Bitcoin extends CryptoCurrency{
         this.low = low;
     }
 
-    @Override
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
-    @Override
     public LocalDate getDate() {
         return date;
     }
 
-    @Override
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    @Override
     public Double getClose() {
         return close;
     }
 
-    @Override
     public void setClose(Double close) {
         this.close = close;
     }
 
-    @Override
     public Long getVolume() {
         return volume;
     }
 
-    @Override
     public void setVolume(Long volume) {
         this.volume = volume;
     }
 
-    @Override
     public Double getOpen() {
         return open;
     }
 
-    @Override
     public void setOpen(Double open) {
         this.open = open;
     }
 
-    @Override
     public Double getHigh() {
         return high;
     }
 
-    @Override
     public void setHigh(Double high) {
         this.high = high;
     }
 
-    @Override
     public Double getLow() {
         return low;
     }
 
-    @Override
     public void setLow(Double low) {
         this.low = low;
     }

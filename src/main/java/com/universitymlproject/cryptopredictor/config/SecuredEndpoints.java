@@ -20,4 +20,8 @@ public class SecuredEndpoints {
             "/api/v1/stocks/tesla/**"
     };
 
+    public final static String UPDATE_ENDPOINTS = "/api/v1/data/update/**";
+    public final static String CSV_FILE_ENDPOINTS = "/api/v1/csv/data/**";
+    public final static String EXCEL_FILE_ENDPOINTS = "/api/v1/excel/data/**";
+
 }

@@ -1,14 +1,14 @@
 package com.universitymlproject.cryptopredictor.repository.crypto;
 
-import com.universitymlproject.cryptopredictor.model.crypto.CryptoCurrency;
+import com.universitymlproject.cryptopredictor.model.crypto.Crypto;
 
 import java.util.List;
 
-public interface CryptoRepository<T extends CryptoCurrency>{
+public interface CryptoRepository<T extends Crypto>{
 
     List<T> getHistory(int start, int offset);
 
-    CryptoCurrency findById(long id);
+    Crypto findById(long id);
 
     void persistEntity(T crypto);
 

@@ -1,8 +1,8 @@
-package com.universitymlproject.cryptopredictor.service;
+package com.universitymlproject.cryptopredictor.service.userrelatedservice;
 
 import com.universitymlproject.cryptopredictor.model.userrelated.Jwt;
 import com.universitymlproject.cryptopredictor.model.userrelated.User;
-import com.universitymlproject.cryptopredictor.repository.JwtRepository;
+import com.universitymlproject.cryptopredictor.repository.userrepository.JwtRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,7 +1,7 @@
 package com.universitymlproject.cryptopredictor.config;
 
 import com.universitymlproject.cryptopredictor.model.userrelated.User;
-import com.universitymlproject.cryptopredictor.repository.UserRepository;
+import com.universitymlproject.cryptopredictor.repository.userrepository.UserRepository;
 import com.universitymlproject.cryptopredictor.restcontroller.exceptionhandling.userrelated.UserNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -2,10 +2,10 @@ package com.universitymlproject.cryptopredictor.config;
 
 import com.universitymlproject.cryptopredictor.filter.CsrfCookieFilter;
 import com.universitymlproject.cryptopredictor.filter.JwtValidatorFilter;
-import com.universitymlproject.cryptopredictor.repository.JwtRepository;
+import com.universitymlproject.cryptopredictor.repository.userrepository.JwtRepository;
 import com.universitymlproject.cryptopredictor.securityexceptionhandling.CustomAccessDeniedHandler;
-import com.universitymlproject.cryptopredictor.service.JwtService;
-import com.universitymlproject.cryptopredictor.service.LogoutService;
+import com.universitymlproject.cryptopredictor.service.userrelatedservice.JwtService;
+import com.universitymlproject.cryptopredictor.service.userrelatedservice.LogoutService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -88,7 +88,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, SecuredEndpoints.STOCKS_ENDPOINTS).hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, SecuredEndpoints.STOCKS_ENDPOINTS).hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.GET, "/api/v1/excel-data").permitAll()
+                        .requestMatchers(SecuredEndpoints.UPDATE_ENDPOINTS).hasRole("ADMIN")
+                        .requestMatchers(SecuredEndpoints.CSV_FILE_ENDPOINTS).hasRole("ADMIN")
+                        .requestMatchers(SecuredEndpoints.EXCEL_FILE_ENDPOINTS).hasRole("ADMIN")
                 );
 
 

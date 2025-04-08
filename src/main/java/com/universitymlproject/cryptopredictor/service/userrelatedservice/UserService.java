@@ -1,4 +1,4 @@
-package com.universitymlproject.cryptopredictor.service;
+package com.universitymlproject.cryptopredictor.service.userrelatedservice;
 
 import com.universitymlproject.cryptopredictor.config.JwtConstants;
 import com.universitymlproject.cryptopredictor.dto.userrelated.LoginCredentialsDTOPost;
@@ -8,7 +8,7 @@ import com.universitymlproject.cryptopredictor.dtomappers.userrelated.LoginRespo
 import com.universitymlproject.cryptopredictor.dtomappers.userrelated.LoginResponseMapper;
 import com.universitymlproject.cryptopredictor.dtomappers.userrelated.UserMapperDTOGet;
 import com.universitymlproject.cryptopredictor.model.userrelated.User;
-import com.universitymlproject.cryptopredictor.repository.UserRepository;
+import com.universitymlproject.cryptopredictor.repository.userrepository.UserRepository;
 import com.universitymlproject.cryptopredictor.restcontroller.exceptionhandling.userrelated.UserNotFoundException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

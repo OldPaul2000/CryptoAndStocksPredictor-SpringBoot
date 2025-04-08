@@ -110,4 +110,17 @@ public class Amazon extends Stock{
     public void setLow(Double low) {
         this.low = low;
     }
+
+    @Override
+    public String toString() {
+        return "Amazon{" +
+                "id=" + id +
+                ", date=" + date +
+                ", close=" + close +
+                ", volume=" + volume +
+                ", open=" + open +
+                ", high=" + high +
+                ", low=" + low +
+                '}';
+    }
 }

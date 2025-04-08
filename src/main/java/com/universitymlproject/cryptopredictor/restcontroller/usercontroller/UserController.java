@@ -1,9 +1,9 @@
-package com.universitymlproject.cryptopredictor.restcontroller;
+package com.universitymlproject.cryptopredictor.restcontroller.usercontroller;
 
 import com.universitymlproject.cryptopredictor.dto.userrelated.LoginCredentialsDTOPost;
 import com.universitymlproject.cryptopredictor.dto.userrelated.LoginResponseDTO;
 import com.universitymlproject.cryptopredictor.dto.userrelated.UserDTOGet;
-import com.universitymlproject.cryptopredictor.service.UserService;
+import com.universitymlproject.cryptopredictor.service.userrelatedservice.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;

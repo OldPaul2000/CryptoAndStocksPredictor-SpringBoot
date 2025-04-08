@@ -1,8 +1,8 @@
-package com.universitymlproject.cryptopredictor.model.crypto;
+package com.universitymlproject.cryptopredictor.model.datafiles;
 
 import java.time.LocalDate;
 
-public class CryptoCurrency {
+public class CsvCurrency {
 
     private Long id;
     private LocalDate date;
@@ -12,8 +12,9 @@ public class CryptoCurrency {
     private Double high;
     private Double low;
 
-    public CryptoCurrency() {}
-    public CryptoCurrency(LocalDate date, Double close, Long volume, Double open, Double high, Double low) {
+    public CsvCurrency() {}
+    public CsvCurrency(Long id, LocalDate date, Double close, Long volume, Double open, Double high, Double low) {
+        this.id = id;
         this.date = date;
         this.close = close;
         this.volume = volume;
@@ -26,7 +27,7 @@ public class CryptoCurrency {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -78,4 +79,16 @@ public class CryptoCurrency {
         this.low = low;
     }
 
+    @Override
+    public String toString() {
+        return "CsvCurrency{" +
+                "id=" + id +
+                ", date=" + date +
+                ", close=" + close +
+                ", volume=" + volume +
+                ", open=" + open +
+                ", high=" + high +
+                ", low=" + low +
+                '}';
+    }
 }

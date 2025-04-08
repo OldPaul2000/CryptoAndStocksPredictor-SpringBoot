@@ -1,4 +1,4 @@
-package com.universitymlproject.cryptopredictor.repository;
+package com.universitymlproject.cryptopredictor.repository.userrepository;
 
 import com.universitymlproject.cryptopredictor.model.userrelated.User;
 import jakarta.persistence.EntityManager;

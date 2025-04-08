@@ -1,7 +1,7 @@
-package com.universitymlproject.cryptopredictor.restcontroller;
+package com.universitymlproject.cryptopredictor.restcontroller.usercontroller;
 
 import com.universitymlproject.cryptopredictor.model.userrelated.Jwt;
-import com.universitymlproject.cryptopredictor.service.JwtService;
+import com.universitymlproject.cryptopredictor.service.userrelatedservice.JwtService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,38 +1,20 @@
 package com.universitymlproject.cryptopredictor.model.crypto;
 
-import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "cardano")
-public class Cardano extends Crypto {
+public class Crypto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-
-    @Column(name = "date")
     private LocalDate date;
-
-    @Column(name = "close")
     private Double close;
-
-    @Column(name = "volume")
     private Long volume;
-
-    @Column(name = "open")
     private Double open;
-
-    @Column(name = "high")
     private Double high;
-
-    @Column(name = "low")
     private Double low;
 
-    public Cardano() {}
-    public Cardano(LocalDate date, Double close, Long volume, Double open, Double high, Double low) {
+    public Crypto() {}
+
+    public Crypto(LocalDate date, Double close, Long volume, Double open, Double high, Double low) {
         this.date = date;
         this.close = close;
         this.volume = volume;
@@ -95,5 +77,18 @@ public class Cardano extends Crypto {
 
     public void setLow(Double low) {
         this.low = low;
+    }
+
+    @Override
+    public String toString() {
+        return "Crypto{" +
+                "id=" + id +
+                ", date=" + date +
+                ", close=" + close +
+                ", volume=" + volume +
+                ", open=" + open +
+                ", high=" + high +
+                ", low=" + low +
+                '}';
     }
 }

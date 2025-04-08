@@ -2,7 +2,7 @@ package com.universitymlproject.cryptopredictor.filter;
 
 import com.universitymlproject.cryptopredictor.config.JwtConstants;
 import com.universitymlproject.cryptopredictor.model.userrelated.Jwt;
-import com.universitymlproject.cryptopredictor.repository.JwtRepository;
+import com.universitymlproject.cryptopredictor.repository.userrepository.JwtRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.InvalidKeyException;

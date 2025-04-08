@@ -1,4 +1,4 @@
-package com.universitymlproject.cryptopredictor.restcontroller;
+package com.universitymlproject.cryptopredictor.restcontroller.usercontroller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

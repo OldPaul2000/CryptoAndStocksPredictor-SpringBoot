@@ -1,4 +1,4 @@
-package com.universitymlproject.cryptopredictor.service;
+package com.universitymlproject.cryptopredictor.service.userrelatedservice;
 
 import com.universitymlproject.cryptopredictor.config.JwtConstants;
 import io.jsonwebtoken.Claims;
