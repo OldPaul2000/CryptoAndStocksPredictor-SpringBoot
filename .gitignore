@@ -1,9 +1,0 @@
-*.properties
-Git Ignore temp.txt
-
-HELP.md
-target/
-.idea
-*.iws
-*.iml
-*.ipr
