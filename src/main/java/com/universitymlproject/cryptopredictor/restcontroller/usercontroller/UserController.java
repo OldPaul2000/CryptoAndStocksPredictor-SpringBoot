@@ -21,12 +21,6 @@ public class UserController {
         this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping("/login2")
-    public ResponseEntity<LoginCredentialsDTOPost> login2(@RequestBody LoginCredentialsDTOPost loginCredentials){
-        System.out.println("Login2");
-        return ResponseEntity.ok(loginCredentials);
-    }
-
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginCredentialsDTOPost loginCredentials){
         return ResponseEntity.ok(userService.login(loginCredentials, authenticationManager));
@@ -35,21 +29,6 @@ public class UserController {
     @GetMapping("/{userId}")
     public UserDTOGet getUserById(@PathVariable("userId") long userId){
         return userService.getUserById(userId);
-    }
-
-    @GetMapping("/how-are-you")
-    public String aswHowAreYou(){
-        return "How are you ?";
-    }
-
-    @GetMapping("/hello")
-    public String sayHello(){
-        return "Hello !";
-    }
-
-    @GetMapping("/goodbye")
-    public String sayGoodbye(){
-        return "Goodbye !";
     }
 
 }
