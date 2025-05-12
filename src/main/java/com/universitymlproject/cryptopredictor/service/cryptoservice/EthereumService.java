@@ -15,11 +15,11 @@ import java.util.List;
 public class EthereumService {
 
     private CryptoRepository<Ethereum> ethereumRepository;
-    private CryptoMapper cryptoMapper;
+    private CryptoMapper<Ethereum, EthereumDTOGet, EthereumDTOPost> cryptoMapper;
 
     @Autowired
     public EthereumService(CryptoRepository<Ethereum> ethereumRepository,
-                           @Qualifier("ethereumMapper") CryptoMapper cryptoMapper) {
+                           @Qualifier("ethereumMapper") CryptoMapper<Ethereum, EthereumDTOGet, EthereumDTOPost> cryptoMapper) {
         this.ethereumRepository = ethereumRepository;
         this.cryptoMapper = cryptoMapper;
     }

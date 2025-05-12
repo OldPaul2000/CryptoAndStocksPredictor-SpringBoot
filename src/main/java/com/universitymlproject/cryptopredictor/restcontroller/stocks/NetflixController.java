@@ -28,19 +28,20 @@ public class NetflixController {
     @PostMapping("")
     public ResponseEntity<String> addNewNetflixRecord(@RequestBody NetflixDTOPost netflixDTO) {
         netflixService.addNetflixRecord(netflixDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateNetflixRecord(@PathVariable long id, NetflixDTOPost netflixDTO) {
+    public ResponseEntity<String> updateNetflixRecord(@PathVariable long id,
+                                                      @RequestBody NetflixDTOPost netflixDTO) {
         netflixService.updateNetflixRecord(id, netflixDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteNetflixRecord(@PathVariable long id) {
         netflixService.deleteNetflixRecord(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
     
 }

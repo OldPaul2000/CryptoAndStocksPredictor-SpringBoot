@@ -1,7 +1,7 @@
 package com.universitymlproject.cryptopredictor;
 
-import com.universitymlproject.cryptopredictor.repository.crypto.GeneralCryptoRepository;
-import com.universitymlproject.cryptopredictor.repository.stocks.GeneralStocksRepository;
+import com.universitymlproject.cryptopredictor.service.filesservice.CsvFileService;
+import com.universitymlproject.cryptopredictor.service.filesservice.ExcelService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,9 +16,8 @@ public class CryptopredictorApplication {
 
 
 	@Bean
-	public CommandLineRunner commandLineRunner(GeneralCryptoRepository cryptoRepo, GeneralStocksRepository stocksRepo){
+	public CommandLineRunner commandLineRunner(CsvFileService csv, ExcelService exl){
 		return runner -> {
-
 
 		};
 	}

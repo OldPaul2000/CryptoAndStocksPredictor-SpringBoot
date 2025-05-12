@@ -28,19 +28,20 @@ public class AppleController {
     @PostMapping("")
     public ResponseEntity<String> addNewAppleRecord(@RequestBody AppleDTOPost appleDTO) {
         appleService.addAppleRecord(appleDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateAppleRecord(@PathVariable long id, AppleDTOPost appleDTO) {
+    public ResponseEntity<String> updateAppleRecord(@PathVariable long id,
+                                                    @RequestBody AppleDTOPost appleDTO) {
         appleService.updateAppleRecord(id, appleDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAppleRecord(@PathVariable long id) {
         appleService.deleteAppleRecord(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
     
 }

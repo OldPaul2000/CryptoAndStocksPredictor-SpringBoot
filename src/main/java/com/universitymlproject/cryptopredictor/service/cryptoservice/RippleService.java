@@ -15,11 +15,11 @@ import java.util.List;
 public class RippleService {
 
     private CryptoRepository<Ripple> rippleRepository;
-    private CryptoMapper cryptoMapper;
+    private CryptoMapper<Ripple, RippleDTOGet, RippleDTOPost> cryptoMapper;
 
     @Autowired
     public RippleService(CryptoRepository<Ripple> rippleRepository,
-                         @Qualifier("rippleMapper") CryptoMapper cryptoMapper) {
+                         @Qualifier("rippleMapper") CryptoMapper<Ripple, RippleDTOGet, RippleDTOPost> cryptoMapper) {
         this.rippleRepository = rippleRepository;
         this.cryptoMapper = cryptoMapper;
     }

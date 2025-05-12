@@ -15,11 +15,11 @@ import java.util.List;
 public class LitecoinService {
 
     private CryptoRepository<Litecoin> litecoinRepository;
-    private CryptoMapper cryptoMapper;
+    private CryptoMapper<Litecoin, LitecoinDTOGet, LitecoinDTOPost> cryptoMapper;
 
     @Autowired
     public LitecoinService(CryptoRepository<Litecoin> litecoinRepository,
-                           @Qualifier("litecoinMapper") CryptoMapper cryptoMapper) {
+                           @Qualifier("litecoinMapper") CryptoMapper<Litecoin, LitecoinDTOGet, LitecoinDTOPost> cryptoMapper) {
         this.litecoinRepository = litecoinRepository;
         this.cryptoMapper = cryptoMapper;
     }

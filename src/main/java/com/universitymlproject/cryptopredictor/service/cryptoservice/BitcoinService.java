@@ -20,14 +20,12 @@ public class BitcoinService {
 
     @Autowired
     public BitcoinService(CryptoRepository<Bitcoin> bitcoinRepository,
-                          @Qualifier("bitcoinMapper") CryptoMapper cryptoMapper) {
+                          @Qualifier("bitcoinMapper") CryptoMapper<Bitcoin, BitcoinDTOGet, BitcoinDTOPost> cryptoMapper) {
         this.bitcoinRepository = bitcoinRepository;
         this.cryptoMapper = cryptoMapper;
     }
 
     public List<BitcoinDTOGet> getBitcoinHistory(int start, int resultsPerPage){
-        System.out.println(start);
-        System.out.println(resultsPerPage);
         return bitcoinRepository.getHistory(start, resultsPerPage)
                 .stream().map(bitcoin -> {
                     return cryptoMapper.toDTO(bitcoin);

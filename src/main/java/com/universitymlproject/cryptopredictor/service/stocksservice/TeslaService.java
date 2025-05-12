@@ -15,11 +15,11 @@ import java.util.List;
 public class TeslaService {
 
     private StocksRepository<Tesla> teslaRepository;
-    private StocksMapper stocksMapper;
+    private StocksMapper<Tesla, TeslaDTOGet, TeslaDTOPost> stocksMapper;
 
     @Autowired
     public TeslaService(StocksRepository<Tesla> teslaRepository,
-                        @Qualifier("teslaMapper") StocksMapper cryptoMapper) {
+                        @Qualifier("teslaMapper") StocksMapper<Tesla, TeslaDTOGet, TeslaDTOPost> cryptoMapper) {
         this.teslaRepository = teslaRepository;
         this.stocksMapper = cryptoMapper;
     }

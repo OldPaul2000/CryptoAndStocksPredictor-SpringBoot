@@ -28,19 +28,20 @@ public class StarbucksController {
     @PostMapping("")
     public ResponseEntity<String> addNewStarbucksRecord(@RequestBody StarbucksDTOPost starbucksDTO) {
         starbucksService.addStarbucksRecord(starbucksDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateStarbucksRecord(@PathVariable long id, StarbucksDTOPost starbucksDTO) {
+    public ResponseEntity<String> updateStarbucksRecord(@PathVariable long id,
+                                                        @RequestBody StarbucksDTOPost starbucksDTO) {
         starbucksService.updateStarbucksRecord(id, starbucksDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteStarbucksRecord(@PathVariable long id) {
         starbucksService.deleteStarbucksRecord(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
     
 }

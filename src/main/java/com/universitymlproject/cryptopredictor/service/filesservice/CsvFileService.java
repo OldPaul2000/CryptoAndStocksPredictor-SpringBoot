@@ -47,8 +47,11 @@ public class CsvFileService {
 
     private void insertRecordDataInList(CSVRecord record, LocalDate lastRecordDateInMySQL){
         if(record.getRecordNumber() > 1){
-            LocalDate csvRecordDate = convertToLocalDate(record.get(0));
-            if(csvRecordDate.isAfter(lastRecordDateInMySQL) && !csvRecordDateEqualToMySQLDate){
+            LocalDate csvRecordDate = null;
+            if(lastRecordDateInMySQL != null){
+                csvRecordDate = convertToLocalDate(record.get(0));
+            }
+            if(lastRecordDateInMySQL == null || (csvRecordDate.isAfter(lastRecordDateInMySQL) && !csvRecordDateEqualToMySQLDate)){
                 data.add(0,convertToCsvCurrency(record));
             }
             else{

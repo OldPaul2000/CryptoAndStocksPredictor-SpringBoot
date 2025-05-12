@@ -15,11 +15,11 @@ import java.util.List;
 public class CardanoService {
 
     private CryptoRepository<Cardano> cardanoRepository;
-    private CryptoMapper cryptoMapper;
+    private CryptoMapper<Cardano, CardanoDTOGet, CardanoDTOPost> cryptoMapper;
 
     @Autowired
     public CardanoService(CryptoRepository<Cardano> cardanoRepository,
-                          @Qualifier("cardanoMapper") CryptoMapper cryptoMapper) {
+                          @Qualifier("cardanoMapper") CryptoMapper<Cardano, CardanoDTOGet, CardanoDTOPost> cryptoMapper) {
         this.cardanoRepository = cardanoRepository;
         this.cryptoMapper = cryptoMapper;
     }

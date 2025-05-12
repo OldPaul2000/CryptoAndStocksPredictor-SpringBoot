@@ -74,7 +74,7 @@ public class UserService {
                     .collect(Collectors.joining(",")))
                     .claim("userId", user.getId())
                     .issuedAt(new Date())
-                    .expiration(new Date(new Date().getTime() + 3600 * 8))
+                    .expiration(new Date(new Date().getTime() + 3600 * 1000 * 8))
                     .signWith(secretKey).compact();
 
             jwtService.addNewToken(user, jwt);

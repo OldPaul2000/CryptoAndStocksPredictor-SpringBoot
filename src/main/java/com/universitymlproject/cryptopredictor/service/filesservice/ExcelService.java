@@ -45,13 +45,23 @@ public class ExcelService {
 
     private void insertRecordDataInList(XSSFSheet sheet, LocalDate lastRecordDateInMySQL){
         XSSFRow row = sheet.getRow(rowIndex);
-        LocalDate rowRecordDate = convertToLocalDate(row.getCell(0).getStringCellValue());
-        while(rowRecordDate.isAfter(lastRecordDateInMySQL)){
-            ExcelCurrency rowData = convertToExcelCurrency(rowIndex, row);
-            data.add(0, rowData);
-            rowIndex++;
-            row = sheet.getRow(rowIndex);
+        LocalDate rowRecordDate;
+        if(lastRecordDateInMySQL != null){
             rowRecordDate = convertToLocalDate(row.getCell(0).getStringCellValue());
+            while(rowRecordDate.isAfter(lastRecordDateInMySQL)){
+                ExcelCurrency rowData = convertToExcelCurrency(rowIndex, row);
+                data.add(0, rowData);
+                rowIndex++;
+                row = sheet.getRow(rowIndex);
+                rowRecordDate = convertToLocalDate(row.getCell(0).getStringCellValue());
+            }
+        }
+        else{
+            while((row = sheet.getRow(rowIndex)) != null){
+                ExcelCurrency rowData = convertToExcelCurrency(rowIndex, row);
+                data.add(0, rowData);
+                rowIndex++;
+            }
         }
     }
 

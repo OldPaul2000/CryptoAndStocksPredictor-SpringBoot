@@ -28,19 +28,20 @@ public class RippleController {
     @PostMapping("")
     public ResponseEntity<String> addNewRippleRecord(@RequestBody RippleDTOPost rippleDTO) {
         rippleService.addRippleRecord(rippleDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateRippleRecord(@PathVariable long id, RippleDTOPost rippleDTO) {
+    public ResponseEntity<String> updateRippleRecord(@PathVariable long id,
+                                                     @RequestBody RippleDTOPost rippleDTO) {
         rippleService.updateRippleRecord(id, rippleDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteRippleRecord(@PathVariable long id) {
         rippleService.deleteRippleRecord(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
     
 }

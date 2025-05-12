@@ -77,5 +77,18 @@ public class ExcelCurrency{
     public void setLow(Double low) {
         this.low = low;
     }
+
+    @Override
+    public String toString() {
+        return "ExcelCurrency{" +
+                "id=" + id +
+                ", date=" + date +
+                ", close=" + close +
+                ", volume=" + volume +
+                ", open=" + open +
+                ", high=" + high +
+                ", low=" + low +
+                '}';
+    }
 }
 

@@ -28,19 +28,20 @@ public class MicrosoftController {
     @PostMapping("")
     public ResponseEntity<String> addNewMicrosoftRecord(@RequestBody MicrosoftDTOPost microsoftDTO) {
         microsoftService.addMicrosoftRecord(microsoftDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateMicrosoftRecord(@PathVariable long id, MicrosoftDTOPost microsoftDTO) {
+    public ResponseEntity<String> updateMicrosoftRecord(@PathVariable long id,
+                                                        @RequestBody MicrosoftDTOPost microsoftDTO) {
         microsoftService.updateMicrosoftRecord(id, microsoftDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteMicrosoftRecord(@PathVariable long id) {
         microsoftService.deleteMicrosoftRecord(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
     
 }

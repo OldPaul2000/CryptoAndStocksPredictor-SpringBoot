@@ -3,6 +3,7 @@ package com.universitymlproject.cryptopredictor.restcontroller.dataupdatecontrol
 import com.universitymlproject.cryptopredictor.model.crypto.Crypto;
 import com.universitymlproject.cryptopredictor.model.stocks.Stock;
 import com.universitymlproject.cryptopredictor.service.databaseupdateservice.DatabaseUpdateService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,8 +31,9 @@ public class DataUpdateController {
     }
 
     @PostMapping("/confirm")
-    public void updateDatabase(){
+    public ResponseEntity<String> updateDatabase(){
         updateService.updateDatabase();
+        return ResponseEntity.ok("Data updated successfully");
     }
 
     @PostMapping("/cancel")

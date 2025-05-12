@@ -15,11 +15,11 @@ import java.util.List;
 public class MicrosoftService {
 
     private StocksRepository<Microsoft> microsoftRepository;
-    private StocksMapper stocksMapper;
+    private StocksMapper<Microsoft, MicrosoftDTOGet, MicrosoftDTOPost> stocksMapper;
 
     @Autowired
     public MicrosoftService(StocksRepository<Microsoft> microsoftRepository,
-                            @Qualifier("microsoftMapper") StocksMapper cryptoMapper) {
+                            @Qualifier("microsoftMapper") StocksMapper<Microsoft, MicrosoftDTOGet, MicrosoftDTOPost> cryptoMapper) {
         this.microsoftRepository = microsoftRepository;
         this.stocksMapper = cryptoMapper;
     }

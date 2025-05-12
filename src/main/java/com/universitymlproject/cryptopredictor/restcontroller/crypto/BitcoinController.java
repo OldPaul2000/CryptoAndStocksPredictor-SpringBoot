@@ -28,19 +28,20 @@ public class BitcoinController {
     @PostMapping("")
     public ResponseEntity<String> addNewBitcoinRecord(@RequestBody BitcoinDTOPost bitcoinDTO) {
         bitcoinService.addBitcoinRecord(bitcoinDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateBitcoinRecord(@PathVariable long id, BitcoinDTOPost bitcoinDTO) {
+    public ResponseEntity<String> updateBitcoinRecord(@PathVariable long id,
+                                                      @RequestBody BitcoinDTOPost bitcoinDTO) {
         bitcoinService.updateBitcoinRecord(id, bitcoinDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteBitcoinRecord(@PathVariable long id) {
         bitcoinService.deleteBitcoinRecord(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
 
 }

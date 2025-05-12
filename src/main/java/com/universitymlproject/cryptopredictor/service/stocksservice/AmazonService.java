@@ -15,11 +15,11 @@ import java.util.List;
 public class AmazonService {
 
     private StocksRepository<Amazon> amazonRepository;
-    private StocksMapper stocksMapper;
+    private StocksMapper<Amazon, AmazonDTOGet, AmazonDTOPost> stocksMapper;
 
     @Autowired
     public AmazonService(StocksRepository<Amazon> amazonRepository,
-                         @Qualifier("amazonMapper") StocksMapper cryptoMapper) {
+                         @Qualifier("amazonMapper") StocksMapper<Amazon, AmazonDTOGet, AmazonDTOPost> cryptoMapper) {
         this.amazonRepository = amazonRepository;
         this.stocksMapper = cryptoMapper;
     }

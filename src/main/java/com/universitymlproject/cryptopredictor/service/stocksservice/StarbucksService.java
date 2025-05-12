@@ -15,11 +15,11 @@ import java.util.List;
 public class StarbucksService {
 
     private StocksRepository<Starbucks> starbucksRepository;
-    private StocksMapper stocksMapper;
+    private StocksMapper<Starbucks, StarbucksDTOGet, StarbucksDTOPost> stocksMapper;
 
     @Autowired
     public StarbucksService(StocksRepository<Starbucks> starbucksRepository,
-                            @Qualifier("starbucksMapper")  StocksMapper cryptoMapper) {
+                            @Qualifier("starbucksMapper")  StocksMapper<Starbucks, StarbucksDTOGet, StarbucksDTOPost> cryptoMapper) {
         this.starbucksRepository = starbucksRepository;
         this.stocksMapper = cryptoMapper;
     }

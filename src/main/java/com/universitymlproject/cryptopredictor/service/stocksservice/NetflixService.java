@@ -15,11 +15,11 @@ import java.util.List;
 public class NetflixService {
 
     private StocksRepository<Netflix> netflixRepository;
-    private StocksMapper stocksMapper;
+    private StocksMapper<Netflix, NetflixDTOGet, NetflixDTOPost> stocksMapper;
 
     @Autowired
     public NetflixService(StocksRepository<Netflix> netflixRepository,
-                          @Qualifier("netflixMapper") StocksMapper cryptoMapper) {
+                          @Qualifier("netflixMapper") StocksMapper<Netflix, NetflixDTOGet, NetflixDTOPost> cryptoMapper) {
         this.netflixRepository = netflixRepository;
         this.stocksMapper = cryptoMapper;
     }

@@ -15,11 +15,11 @@ import java.util.List;
 public class AppleService {
 
     private StocksRepository<Apple> appleRepository;
-    private StocksMapper stocksMapper;
+    private StocksMapper<Apple, AppleDTOGet, AppleDTOPost> stocksMapper;
 
     @Autowired
     public AppleService(StocksRepository<Apple> appleRepository,
-                        @Qualifier("appleMapper") StocksMapper cryptoMapper) {
+                        @Qualifier("appleMapper") StocksMapper<Apple, AppleDTOGet, AppleDTOPost> cryptoMapper) {
         this.appleRepository = appleRepository;
         this.stocksMapper = cryptoMapper;
     }

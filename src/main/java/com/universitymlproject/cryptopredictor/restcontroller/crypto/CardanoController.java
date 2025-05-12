@@ -28,19 +28,20 @@ public class CardanoController {
     @PostMapping("")
     public ResponseEntity<String> addNewCardanoRecord(@RequestBody CardanoDTOPost cardanoDTO) {
         cardanoService.addCardanoRecord(cardanoDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateCardanoRecord(@PathVariable long id, CardanoDTOPost cardanoDTO) {
+    public ResponseEntity<String> updateCardanoRecord(@PathVariable long id,
+                                                      @RequestBody CardanoDTOPost cardanoDTO) {
         cardanoService.updateCardanoRecord(id, cardanoDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCardanoRecord(@PathVariable long id) {
         cardanoService.deleteCardanoRecord(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
     
 }

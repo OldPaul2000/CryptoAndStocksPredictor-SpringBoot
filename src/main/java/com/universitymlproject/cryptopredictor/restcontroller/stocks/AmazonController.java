@@ -28,19 +28,20 @@ public class AmazonController {
     @PostMapping("")
     public ResponseEntity<String> addNewAmazonRecord(@RequestBody AmazonDTOPost amazonDTO) {
         amazonService.addAmazonRecord(amazonDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateAmazonRecord(@PathVariable long id, AmazonDTOPost amazonDTO) {
+    public ResponseEntity<String> updateAmazonRecord(@PathVariable long id,
+                                                     @RequestBody AmazonDTOPost amazonDTO) {
         amazonService.updateAmazonRecord(id, amazonDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAmazonRecord(@PathVariable long id) {
         amazonService.deleteAmazonRecord(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
     
 }

@@ -15,11 +15,11 @@ import java.util.List;
 public class AmdService {
 
     private StocksRepository<Amd> amdRepository;
-    private StocksMapper stocksMapper;
+    private StocksMapper<Amd, AmdDTOGet, AmdDTOPost> stocksMapper;
 
     @Autowired
     public AmdService(StocksRepository<Amd> amdRepository,
-                      @Qualifier("amdMapper") StocksMapper cryptoMapper) {
+                      @Qualifier("amdMapper") StocksMapper<Amd, AmdDTOGet, AmdDTOPost> cryptoMapper) {
         this.amdRepository = amdRepository;
         this.stocksMapper = cryptoMapper;
     }

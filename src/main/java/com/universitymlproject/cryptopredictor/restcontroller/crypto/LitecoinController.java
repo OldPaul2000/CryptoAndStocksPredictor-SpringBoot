@@ -28,19 +28,20 @@ public class LitecoinController {
     @PostMapping("")
     public ResponseEntity<String> addNewLitecoinRecord(@RequestBody LitecoinDTOPost litecoinDTO) {
         litecoinService.addLitecoinRecord(litecoinDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateLitecoinRecord(@PathVariable long id, LitecoinDTOPost litecoinDTO) {
+    public ResponseEntity<String> updateLitecoinRecord(@PathVariable long id,
+                                                       @RequestBody LitecoinDTOPost litecoinDTO) {
         litecoinService.updateLitecoinRecord(id, litecoinDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteLitecoinRecord(@PathVariable long id) {
         litecoinService.deleteLitecoinRecord(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
     
 }

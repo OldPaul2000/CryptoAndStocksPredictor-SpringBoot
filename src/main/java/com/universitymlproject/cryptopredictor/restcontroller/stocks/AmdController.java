@@ -28,19 +28,20 @@ public class AmdController {
     @PostMapping("")
     public ResponseEntity<String> addNewAmdRecord(@RequestBody AmdDTOPost amdDTO) {
         amdService.addAmdRecord(amdDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateAmdRecord(@PathVariable long id, AmdDTOPost amdDTO) {
+    public ResponseEntity<String> updateAmdRecord(@PathVariable long id,
+                                                  @RequestBody AmdDTOPost amdDTO) {
         amdService.updateAmdRecord(id, amdDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAmdRecord(@PathVariable long id) {
         amdService.deleteAmdRecord(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
     
 }

@@ -26,6 +26,7 @@ public class FilesListController {
 
     @GetMapping("")
     private List<String> getAllFiles(@RequestParam String fileType){
+        System.out.println("Get files");
         if(fileType.equalsIgnoreCase("csv")){
             return filesListService.getCsvTrainingDataFiles();
         }

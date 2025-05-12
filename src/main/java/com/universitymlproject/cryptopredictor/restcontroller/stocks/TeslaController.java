@@ -28,19 +28,20 @@ public class TeslaController {
     @PostMapping("")
     public ResponseEntity<String> addNewTeslaRecord(@RequestBody TeslaDTOPost teslaDTO) {
         teslaService.addTeslaRecord(teslaDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateTeslaRecord(@PathVariable long id, TeslaDTOPost teslaDTO) {
+    public ResponseEntity<String> updateTeslaRecord(@PathVariable long id,
+                                                    @RequestBody TeslaDTOPost teslaDTO) {
         teslaService.updateTeslaRecord(id, teslaDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteTeslaRecord(@PathVariable long id) {
         teslaService.deleteTeslaRecord(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
     
 }

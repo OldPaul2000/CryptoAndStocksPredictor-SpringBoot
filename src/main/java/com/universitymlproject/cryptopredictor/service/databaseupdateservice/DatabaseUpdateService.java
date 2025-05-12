@@ -6,7 +6,6 @@ import com.universitymlproject.cryptopredictor.model.stocks.*;
 import com.universitymlproject.cryptopredictor.repository.crypto.GeneralCryptoRepository;
 import com.universitymlproject.cryptopredictor.repository.stocks.GeneralStocksRepository;
 import com.universitymlproject.cryptopredictor.service.filesservice.CsvFileService;
-import com.universitymlproject.cryptopredictor.service.filesservice.ExcelService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,18 +19,15 @@ public class DatabaseUpdateService {
     private GeneralCryptoRepository cryptoRepository;
     private GeneralStocksRepository stocksRepository;
     private CsvFileService csvFileService;
-    private ExcelService excelService;
     private CurrencyCaster currencyCaster;
 
     public DatabaseUpdateService(GeneralCryptoRepository cryptoRepository,
                                  GeneralStocksRepository stocksRepository,
                                  CsvFileService csvFileService,
-                                 ExcelService excelService,
                                  CurrencyCaster currencyCaster) {
         this.cryptoRepository = cryptoRepository;
         this.stocksRepository = stocksRepository;
         this.csvFileService = csvFileService;
-        this.excelService = excelService;
         this.currencyCaster = currencyCaster;
     }
 
@@ -53,7 +49,7 @@ public class DatabaseUpdateService {
             newStockData.forEach(element -> {
                 Stock stock = currencyCaster.castStock(element, stockToUpdate);
                 System.out.println(stock);
-//                stocksRepository.persistEntity(stock);
+                stocksRepository.persistEntity(stock);
             });
             newStockData = new ArrayList<>();
             stockToUpdate = null;
@@ -73,7 +69,7 @@ public class DatabaseUpdateService {
         cryptoToUpdate = null;
 
         Stock currency = stocksRepository.findLastRecord(stocksClasses.get(stockClass));
-        LocalDate lastRecordDatabaseDate = currency.getDate();
+        LocalDate lastRecordDatabaseDate = (currency == null ? null : currency.getDate());
         csvFileService.parseCsvData(fileName, lastRecordDatabaseDate);
         csvFileService.getData().forEach(record -> {
             newStockData.add(mapFromCsvToStock(record));
@@ -112,7 +108,7 @@ public class DatabaseUpdateService {
         stockToUpdate = null;
 
         Crypto currency = cryptoRepository.findLastRecord(cryptoClasses.get(cryptoClass));
-        LocalDate lastRecordDatabaseDate = currency.getDate();
+        LocalDate lastRecordDatabaseDate = (currency == null ? null : currency.getDate());
         csvFileService.parseCsvData(fileName, lastRecordDatabaseDate);
         csvFileService.getData().forEach(record -> {
             newCryptoData.add(mapFromCsvToCrypto(record));

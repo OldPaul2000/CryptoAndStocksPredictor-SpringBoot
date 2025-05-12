@@ -56,7 +56,7 @@ public class SecurityConfig {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration corsConfig = new CorsConfiguration();
-                corsConfig.setAllowedOrigins(List.of("http://localhost:1234", "http://192.168.0.103:1234"));
+                corsConfig.setAllowedOrigins(List.of("http://localhost:1234"));
                 corsConfig.setAllowCredentials(true);
                 corsConfig.setAllowedMethods(Collections.singletonList("*"));
                 corsConfig.setAllowedHeaders(Collections.singletonList("*"));
@@ -74,16 +74,17 @@ public class SecurityConfig {
                 .requiresChannel(rcc -> rcc.anyRequest().requiresInsecure())
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/api/v1/users/login").permitAll()
+                        .requestMatchers("/api/v1/users/logout").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/api/v1/users/{userId}").permitAll()
                         .requestMatchers("/api/v1/jwt/{userId}").hasAnyRole("USER","ADMIN")
-                        .requestMatchers("/api/v1/csrf").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/api/v1/csrf").hasAnyRole("USER","ADMIN")
 
-                        .requestMatchers(HttpMethod.GET, SecuredEndpoints.CRYPTO_ENDPOINTS).permitAll()
+                        .requestMatchers(HttpMethod.GET, SecuredEndpoints.CRYPTO_ENDPOINTS).hasAnyRole("USER","ADMIN")
                         .requestMatchers(HttpMethod.POST, SecuredEndpoints.CRYPTO_ENDPOINTS).hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, SecuredEndpoints.CRYPTO_ENDPOINTS).hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, SecuredEndpoints.CRYPTO_ENDPOINTS).hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.GET, SecuredEndpoints.STOCKS_ENDPOINTS).permitAll()
+                        .requestMatchers(HttpMethod.GET, SecuredEndpoints.STOCKS_ENDPOINTS).hasAnyRole("USER","ADMIN")
                         .requestMatchers(HttpMethod.POST, SecuredEndpoints.STOCKS_ENDPOINTS).hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, SecuredEndpoints.STOCKS_ENDPOINTS).hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, SecuredEndpoints.STOCKS_ENDPOINTS).hasRole("ADMIN")
@@ -91,6 +92,7 @@ public class SecurityConfig {
                         .requestMatchers(SecuredEndpoints.UPDATE_ENDPOINTS).hasRole("ADMIN")
                         .requestMatchers(SecuredEndpoints.CSV_FILE_ENDPOINTS).hasRole("ADMIN")
                         .requestMatchers(SecuredEndpoints.EXCEL_FILE_ENDPOINTS).hasRole("ADMIN")
+                        .requestMatchers(SecuredEndpoints.FILES_LIST).hasRole("ADMIN")
                 );
 
 
@@ -102,7 +104,6 @@ public class SecurityConfig {
 
         httpSecurity.httpBasic(config -> config.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
         httpSecurity.exceptionHandling(config -> config.accessDeniedHandler(new CustomAccessDeniedHandler()));
-
 
         return httpSecurity.build();
     }

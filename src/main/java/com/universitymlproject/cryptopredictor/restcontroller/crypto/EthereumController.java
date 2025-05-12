@@ -28,19 +28,20 @@ public class EthereumController {
     @PostMapping("")
     public ResponseEntity<String> addNewEthereumRecord(@RequestBody EthereumDTOPost ethereumDTO) {
         ethereumService.addEthereumRecord(ethereumDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateEthereumRecord(@PathVariable long id, EthereumDTOPost ethereumDTO) {
+    public ResponseEntity<String> updateEthereumRecord(@PathVariable long id,
+                                                       @RequestBody EthereumDTOPost ethereumDTO) {
         ethereumService.updateEthereumRecord(id, ethereumDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteEthereumRecord(@PathVariable long id) {
         ethereumService.deleteEthereumRecord(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
     
 }
